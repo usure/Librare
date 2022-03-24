@@ -5,7 +5,14 @@ require 'psych'
 
 $library = "library.yaml"
 
-def add_book(title, author, pages)
+def add_book()
+  print 'Book title? '
+  title = gets.chomp
+  print 'Book author? '
+  author = gets.chomp
+  print 'Book length? '
+  pages = gets.chomp.to_i
+
   book = { title: title,
            author: author,
            pages: pages}
@@ -21,19 +28,11 @@ def list_books()
   end
 end
 
-stuff.each do |
 options = OpenStruct.new
 OptionParser.new do |opt|
-  opt.on('-t', '--title TITLE', 'The title') { |o| options.title = o }
-  opt.on('-a', '--author AUTHOR', 'The author') { |o| options.author = o }
-  opt.on('-p', '--pages PAGES', 'Book length') { |o| options.pages = o }
-  opt.on('-r', '--reading') { |o| list_books() }
+  #opt.on('-t', '--title TITLE', 'The title') { |o| options.title = o }
+  #opt.on('-a', '--author AUTHOR', 'The author') { |o| options.author = o }
+  #opt.on('-p', '--pages PAGES', 'Book length') { |o| options.pages = o }
+  opt.on('-a', 'Add book') { |o| add_book }
+  opt.on('-r', '--reading') { |o| list_books }
 end.parse!
-
-
-#puts "------------"
-#puts "Title: #{options.title}"
-#puts "Author: #{options.author}"
-#puts "Pages: #{options.pages}"
-#puts "------------"
-add_book(options.title, options.author, options.pages.to_i)
